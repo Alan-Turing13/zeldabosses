@@ -1,18 +1,22 @@
-package com.dominicjmarshall.zeldabosses.api.service;
+package com.dominicjmarshall.zeldabosses.service;
 
 import com.dominicjmarshall.zeldabosses.api.orm.boss.JsonBossesObject;
+import com.dominicjmarshall.zeldabosses.api.service.DungeonsParser;
 import com.dominicjmarshall.zeldabosses.model.Boss;
 import com.dominicjmarshall.zeldabosses.model.BossRecord;
+import com.dominicjmarshall.zeldabosses.repository.BossRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class BossService {
 
-    public static List<Boss> mapJsonToBossList(String json){
-
+    public List<Boss> mapJsonToBossList(String json){
         ObjectMapper objectMapper = new ObjectMapper();
         JsonBossesObject jbo = null;
         try {
@@ -31,6 +35,13 @@ public class BossService {
             );
         }
         return bosses;
-
     }
+
+    @Autowired
+    BossRepository bossRepository;
+
+    public List<Boss> saveBosses(List<Boss> bosses){
+        return (List) bossRepository.saveAll(bosses);
+    }
+
 }

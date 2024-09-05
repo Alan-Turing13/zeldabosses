@@ -1,4 +1,4 @@
-package com.dominicjmarshall.zeldabosses;
+package com.dominicjmarshall.zeldabosses.repository;
 
 import com.dominicjmarshall.zeldabosses.model.Boss;
 import org.springframework.data.repository.CrudRepository;
